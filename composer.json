@@ -1,0 +1,19 @@
+{
+    "name": "rafaelwielewski/twitter-clone",
+    "authors": [
+        {
+            "name": "Rafael Wielewski",
+            "email": "rafaw99@gmail.com"
+        }
+    ],
+    "require": {
+    	"phpmailer/phpmailer":"6.1.6",
+    	"slim/slim":"2.0",
+    	"rain/raintpl":"3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rafael\\": "vendor\\Rafael\\php-classes\\src"
+        }
+    }
+}

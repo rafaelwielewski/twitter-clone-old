@@ -1,13 +1,13 @@
 <?php 
 
-namespace Rafaelcode\DB;
+namespace Rafael\DB;
 
 class Sql {
 
 	const HOSTNAME = "localhost";
 	const USERNAME = "root";
 	const PASSWORD = "";
-	const DBNAME = "db_twitter-clone";
+	const DBNAME = "db_twitter";
 
 	private $conn;
 

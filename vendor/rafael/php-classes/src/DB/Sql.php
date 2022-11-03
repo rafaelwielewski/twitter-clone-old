@@ -7,7 +7,7 @@ class Sql {
 	const HOSTNAME = "localhost";
 	const USERNAME = "root";
 	const PASSWORD = "";
-	const DBNAME = "db_twitter";
+	const DBNAME = "db_tc";
 
 	private $conn;
 

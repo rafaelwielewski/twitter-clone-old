@@ -5,7 +5,7 @@
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <div class="form-floating">
     <textarea class="form-control bg-black text-white fs-3 fw-normal" style="height: 100px" class="form-control" id="tweet" name="tweet" value="tweet" placeholder="What's happening" required></textarea>
-    <button type="submit" class="btn btn-primary" name="enviar" id="enviar" value="enviar">Tweet</button>
+    <button type="submit" class="btn btn-primary" name="enviar" id="enviar" value="enviar" action="/register" class="register" method="post">Tweet</button>
   </div>
   </form>
   
@@ -37,9 +37,5 @@
 
 </main>
 
-
-  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="sidebars.js"></script>
 </body>
 </html>

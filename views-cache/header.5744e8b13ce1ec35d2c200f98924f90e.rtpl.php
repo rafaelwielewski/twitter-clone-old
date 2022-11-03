@@ -22,7 +22,7 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/res/site/css/owl.carousel.css">
-    <link type="text/css" rel="stylesheet" href="/res/site/css/style.css">
+    <link type="text/css" rel="stylesheet" href="/res/site/css/styles.css">
     <link rel="stylesheet" href="/res/site/css/responsive.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -39,6 +39,9 @@
   </head>
   <body>
     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+    <script src="/res/site/js/sidebars.js"></script>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="bootstrap" viewBox="0 0 118 94">
     <title>Bootstrap</title>
@@ -195,16 +198,18 @@
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>Batmano</strong>
+        <?php $counter1=-1;  if( isset($login) && ( is_array($login) || $login instanceof Traversable ) && sizeof($login) ) foreach( $login as $key1 => $value1 ){ $counter1++; ?>
+        <strong><?php echo htmlspecialchars( $value1["login"], ENT_COMPAT, 'UTF-8', FALSE ); ?></strong>
+        <?php } ?>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
       </ul>
     </div>
+
+
+
+    
   </div>
 
 

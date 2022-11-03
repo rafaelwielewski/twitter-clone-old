@@ -50,11 +50,17 @@ $app->get("/logout", function(){
 
 $app->get("/home", function(){
 	
+
+	$login = User::getFromSession();
+
     User::verifyLogin(false);
 	
     $page = new Page();
 
-	$page->setTpl("index");
+	$page->setTpl("index", [
+		'login'=>$login->getValues($login)
+	]);
+
 
 });
 

@@ -8,7 +8,7 @@ use \Rafael\Mailer;
 
 class User extends Model {
 
-	const SESSION = "User";
+	const SESSION = "User"; //constante das seccion com nome user
 	const SECRET = "HcodePhp7_Secret";
 	const SECRET_IV = "HcodePhp7_Secret_IV";
 	const ERROR = "UserError";
@@ -30,21 +30,21 @@ class User extends Model {
 
 	}
 
-	public static function checkLogin($inadmin = true)
+	public static function checkLogin($inadmin = true)//o usuario e admin?
 	{
 
 		if (
-			!isset($_SESSION[User::SESSION])
+			!isset($_SESSION[User::SESSION])//if session not defined
+			||//or
+			!$_SESSION[User::SESSION]//if session defined but empty
 			||
-			!$_SESSION[User::SESSION]
-			||
-			!(int)$_SESSION[User::SESSION]["iduser"] > 0
+			!(int)$_SESSION[User::SESSION]["iduser"] > 0// se iduser dentro da seccao nao for maior que zero, se for maior que zero e um usuario 
 		) {
 			//Não está logado
 			return false;
 
 		} else {
-
+           //verifica se e admin
 			if ($inadmin === true && (bool)$_SESSION[User::SESSION]['inadmin'] === true) {
 
 				return true;
@@ -65,27 +65,27 @@ class User extends Model {
 
 	public static function login($login, $password)
 	{
-
+	// metodo estatico que busca no banco de dados se login e senha encriptada existem
 		$sql = new Sql();
-
+		//:LOGIN evita injection
 		$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b ON a.idperson = b.idperson WHERE a.deslogin = :LOGIN", array(
-			":LOGIN"=>$login
+			":LOGIN"=>$login//:LOGIN vai ser a variavel login que esta recebendo no metodo
 		)); 
 
-		if (count($results) === 0)
+		if (count($results) === 0)//se resultado =0 nao encontrou nada
 		{
-			throw new \Exception("Usuário inexistente ou senha inválida.");
+			throw new \Exception("Usuário inexistente ou senha inválida.");// barra inversa na exception pois ela esta no escopo principal e nao dentro do namespace
 		}
 
-		$data = $results[0];
+		$data = $results[0]; //primeiro registro que encontrou para o usuario
 
-		if (password_verify($password, $data["despassword"]) === true)
+		if (password_verify($password, $data["despassword"]) === true)// dois parametros variavel password que veio como parametro e , hash da senha que esta dentro do data que veio do banco de dados
 		{
 
 			$user = new User();
 
-			$data['desperson'] = utf8_encode($data['desperson']);
-
+			$data['desperson'] = utf8_encode($data['desperson']);//compara senha escrita com senha descriptografada
+			//metodo set e get que pega lista de senhas
 			$user->setData($data);
 
 			$_SESSION[User::SESSION] = $user->getValues();
@@ -100,7 +100,7 @@ class User extends Model {
 
 	public static function verifyLogin($inadmin = true)
 	{
-
+		//redireciona para as paginas com o metodo checklogin acima
 		if (!User::checkLogin($inadmin)) {
 
 			if ($inadmin) {

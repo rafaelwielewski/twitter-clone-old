@@ -4,23 +4,17 @@ use \Rafael\Page;
 use \Rafael\Model\Post;
 use \Rafael\Model\User;
 
+
 $app->get('/', function() {
 
-	/*$products = Product::listAll();
+	$posts = Post::showPosts();
 
 	$page = new Page();
 
 	$page->setTpl("index", [
-		'products'=>Product::checkList($products)
+		'posts'=>Post::checkList($posts)
 	]);
-	*/
-
-	$page = new Page();
-
-	$page->setTpl("index");
-
 });
-
 
 $app->get("/login", function(){
 

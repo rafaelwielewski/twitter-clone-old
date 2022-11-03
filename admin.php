@@ -5,39 +5,39 @@ use \Rafael\Model\User;
 
 $app->get('/admin', function() {
     
-	User::verifyLogin();
+	User::verifyLogin();//metodo estatico que verifica se esta logado
 
 	$page = new PageAdmin();
 
 	$page->setTpl("index");
 
 });
+//criar pagina
+$app->get('/admin/login', function() { //link 
 
-$app->get('/admin/login', function() {
-
-	$page = new PageAdmin([
-		"header"=>false,
+	$page = new PageAdmin([ //metodo construtor do arquivo PageAdmin
+		"header"=>false,//sem header
 		"footer"=>false
 	]);
 
-	$page->setTpl("login");
+	$page->setTpl("login");//abre a pagina login da pasta views/admin
 
 });
 
-$app->post('/admin/login', function() {
+$app->post('/admin/login', function() { //recebe login e senha do formulario ao ser clicado no botao pelo metodo post
 
-	User::login($_POST["login"], $_POST["password"]);
+	User::login($_POST["login"], $_POST["password"]);//recebe login e senha do formulario ao ser clicado no botao pelo metodo post
 
-	header("Location: /admin");
+	header("Location: /admin");//redireciona para pagina admin se login e senha correto
 	exit;
 
 });
 
-$app->get('/admin/logout', function() {
+$app->get('/admin/logout', function() {//botao sair redireciona para pagina logout que executa metodo para sair
 
 	User::logout();
 
-	header("Location: /admin/login");
+	header("Location: /admin/login");//redireciona para login
 	exit;
 
 });

@@ -8,8 +8,15 @@
     <button type="submit" class="btn btn-primary" name="enviar" id="enviar" value="enviar">Tweet</button>
   </div>
   </form>
-
-
+  
+  
+  <div class="text-white fs-3 fw-normal bg-dark">
+  <?php $counter1=-1;  if( isset($posts) && ( is_array($posts) || $posts instanceof Traversable ) && sizeof($posts) ) foreach( $posts as $key1 => $value1 ){ $counter1++; ?>
+  <div class="border border-light"><h2><?php echo htmlspecialchars( $value1["deslogin"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h2></div>
+  <div class="border border-light"><h2><?php echo htmlspecialchars( $value1["tweet"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h2></div>     
+  <div class="border border-light"><h2><?php echo htmlspecialchars( $value1["dtregister"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h2></div>
+  <?php } ?>
+  </div>
 
 
 

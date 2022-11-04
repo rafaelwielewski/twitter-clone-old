@@ -33,6 +33,22 @@ class Post extends Model {
 
 	}
 
+	public function save()
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_tweets_save(:iduser, :desname, :deslogin, :destweet)", array(
+			":iduser"=>$this->getiduser(),
+			":desname"=>$this->getdesname(),
+			":deslogin"=>$this->getdeslogin(),
+			":destweet"=>$this->getdestweet()
+		));
+
+		$this->setData($results[0]);
+
+	}
+
 
 }
 

@@ -126,12 +126,11 @@
 
 </svg>
 
-<main class="d-flex flex-nowrap bg-black" style="height: 100vh;">
+<div class="d-flex flex-nowrap bg-black">
 
   <!-- col-lg-8 mx-auto p-4 py-md-5 
   d-flex flex-column flex-shrink-0 p-4 text-bg-dark
 -->
-
 
 
   <div class="col-md-2 d-md-block">
@@ -198,9 +197,7 @@
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
-        <?php $counter1=-1;  if( isset($login) && ( is_array($login) || $login instanceof Traversable ) && sizeof($login) ) foreach( $login as $key1 => $value1 ){ $counter1++; ?>
-        <strong><?php echo htmlspecialchars( $value1["login"], ENT_COMPAT, 'UTF-8', FALSE ); ?></strong>
-        <?php } ?>
+        <?php echo getUserName(); ?>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
         <li><a class="dropdown-item" href="/logout">Sign out</a></li>

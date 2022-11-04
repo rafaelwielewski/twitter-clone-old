@@ -51,18 +51,40 @@ $app->get("/logout", function(){
 $app->get("/home", function(){
 	
 
-	$login = User::getFromSession();
-
-    User::verifyLogin(false);
-	
-    $page = new Page();
-
-	$page->setTpl("index", [
-		'login'=>$login->getValues($login)
+	$posts = Post::showPosts();
+	$page = new Page();
+	$page->setTpl("index" , [
+		'posts'=>Post::checkList($posts)
 	]);
-
-
+	
 });
+
+
+$app->post("/tweet", function(){
+	
+	$user = User::getFromSession();
+	$tweet = new Post();
+
+	$_POST['destweet'] = $_POST['tweet'];
+	$_POST['iduser'] = $user->getiduser();
+	$_POST['desname'] = $user->getdesname();
+	$_POST['deslogin'] = $user->getdeslogin();
+
+	$tweet->setData($_POST);
+
+	$tweet->setData([
+		'desiduser'=>$user->getiduser(),
+		'desname'=>$user->getdesname(),
+		'deslogin'=>$user->getdeslogin(),
+		'destweet'=>$_POST['tweet'],
+	]);
+	$tweet->save();
+
+	header("Location: /home");
+	exit;
+	
+});
+
 
 
 $app->post("/register", function(){

@@ -16,7 +16,36 @@ class User extends Model {
 	const ERROR_REGISTER = "UserErrorRegister";
 	const SUCCESS = "UserSucesss";
     
-    public static function getFromSession()
+	public static function listAll()
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_users ORDER BY deslogin");
+
+		return $results;
+	}
+
+	public function get($iduser)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_users WHERE iduser = :iduser", array(
+			":iduser"=>$iduser
+		));
+
+		$data = $results[0];
+
+		$data['deslogin'] = utf8_encode($data['deslogin']);
+
+
+		$this->setData($data);
+
+	}
+	
+	
+	public static function getFromSession()
 	{
 
 		$user = new User();
@@ -30,8 +59,8 @@ class User extends Model {
 		return $user;
 
 	}
-    
-    
+   
+
     public static function login($login, $password)
 	{
 

@@ -1023,10 +1023,15 @@ div.cart-collaterals ul.products li.product .price ins {
     margin-left: -30px;
     overflow: hidden;
 }
+.col-4 {
+    float: left;
+    margin-left: -25px;
+    margin-right: -25px;
+}
+
 .col-1, .col-2 {
     float: left;
-    margin-left: 30px;
-    width: 360px;
+
 }
 #customer_details label {
     display: block;

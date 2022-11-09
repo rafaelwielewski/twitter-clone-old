@@ -1,8 +1,12 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><div class="col-4 d-flex flex-column flex-shrink-4 p-4">
   <div class="text-white fs-3 fw-normal">
-    <div class="row g-0 border border-light">
-      <div class="col-12">
+    <div class="row g-0 border border-dark">
+      <div class="col-md-10">
+        <img class="img-responsive" height="100" width="100" id="image-preview" src="<?php echo htmlspecialchars( $user["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt="Photo">
         <h2><?php echo htmlspecialchars( $user["desname"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h2>
+      </div>
+      <div class="col-md-2">
+        <a href="/profile/update/<?php echo getUserName(); ?>" class="btn btn-primary" >Edit Profile</a>
       </div>
       <div class="col-12 text-dark">
         <h4>@<?php echo htmlspecialchars( $user["deslogin"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h4>
@@ -28,17 +32,3 @@
     <?php } ?>
 </div>
 </div>
-
-
-<div class="col-2 d-flex flex-column flex-shrink-0 p-4">
-  <span class="border border-light"> Search Twitter</span>
-</div>
-
-<div class="col-2 d-flex flex-column flex-shrink-0 p-2">
-
-</div> 
-
-</div>
-
-</body>
-</html>

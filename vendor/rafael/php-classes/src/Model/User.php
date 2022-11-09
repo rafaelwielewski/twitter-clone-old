@@ -15,7 +15,17 @@ class User extends Model {
 	const ERROR = "UserError";
 	const ERROR_REGISTER = "UserErrorRegister";
 	const SUCCESS = "UserSucesss";
-    
+
+
+    public static function list3()
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_users ORDER BY dtregister LIMIT 0, 3;");
+
+		return $results;
+	}
 	public static function listAll()
 	{
 
@@ -26,9 +36,23 @@ class User extends Model {
 		return $results;
 	}
 
+	public static function checkList($list)
+	{
+
+		foreach ($list as &$row) {
+			
+			$p = new User();
+			$p->setData($row);
+			$row = $p->getValues();
+
+		}
+
+		return $list;
+
+	}
+
 	public function get($deslogin)
 	{
-		var_dump ($deslogin);
 		$sql = new Sql();
 
 		$results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", array(
@@ -241,7 +265,7 @@ public static function checkLoginExist($login)
 
 	}
 
-    public function save()
+public function save()
 	{
 
 		$sql = new Sql();
@@ -254,7 +278,80 @@ public static function checkLoginExist($login)
 
 		$this->setData($results[0]);
 
+}
+
+
+public function checkPhoto()
+{
+
+	if (file_exists(
+		$_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+		"res" . DIRECTORY_SEPARATOR . 
+		"site" . DIRECTORY_SEPARATOR . 
+		"img" . DIRECTORY_SEPARATOR . 
+		"profile" . DIRECTORY_SEPARATOR . 
+		$this->getdeslogin() . ".jpg"
+		)) {
+
+		$url = "/res/site/img/profile/" . $this->getdeslogin() . ".jpg";
+
+	} else {
+
+		$url = "/res/site/img/profile.jpg";
+
 	}
+
+	return $this->setdesphoto($url);//seta dentro do objeto
+
+}
+
+public function getValues()//reescreve o getvalues para incluer foto
+{
+
+	$this->checkPhoto();
+
+	$values = parent::getValues();
+
+	return $values;
+
+}
+
+public function setPhoto($file)
+{
+	$extension = explode('.', $file['name']);//explode para procura nome do arquivo com um ponto antes e fazer um array
+	$extension = end($extension);//pega somente a extensão do arquivo
+	switch ($extension) {
+
+		case "jpg":
+		case "jpeg":
+		$image = imagecreatefromjpeg($file["tmp_name"]);//converte de jpeg o arquivo temporario no servidor
+		break;
+
+		case "gif":
+		$image = imagecreatefromgif($file["tmp_name"]);
+		break;
+
+		case "png":
+		$image = imagecreatefrompng($file["tmp_name"]);
+		break;
+
+	}
+
+	$dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+		"res" . DIRECTORY_SEPARATOR . 
+		"site" . DIRECTORY_SEPARATOR . 
+		"img" . DIRECTORY_SEPARATOR . 
+		"profile" . DIRECTORY_SEPARATOR . 
+		$this->getdeslogin() . ".jpg";//salva imagem do arquivo temporario no destino
+
+	
+	imagepng($image, $dist);//converte $image para jpeg
+
+	imagedestroy($image);
+
+	$this->checkPhoto();//salva foto na memoria
+
+}
 
 
 }

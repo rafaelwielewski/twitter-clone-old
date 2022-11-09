@@ -129,7 +129,7 @@
 <div class="d-flex flex-nowrap bg-black">
   <div class="col-2 d-flex flex-column flex-shrink-0 p-4"></div>
 
-  <div class="twitter-sidebar2 d-flex flex-column flex-shrink-0 p-4 col-2" position="fixed">
+  <div class="col-2 twitter-sidebar2 d-flex flex-column flex-shrink-0 p-4 border border-dark">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#twitter"/></svg>
       <span class="fs-4"></span>

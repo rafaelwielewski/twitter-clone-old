@@ -7,25 +7,14 @@
   </form>
   <div class="text-white fs-3 fw-normal">
   <?php $counter1=-1;  if( isset($postsall) && ( is_array($postsall) || $postsall instanceof Traversable ) && sizeof($postsall) ) foreach( $postsall as $key1 => $value1 ){ $counter1++; ?>
-  <div class="col-12 border border-light">
+  <div class="col-12 border border-dark">
     <label class="text-white"><h3><?php echo htmlspecialchars( $value1["desname"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h2></label>
     <label class="text-dark"><h4>@<?php echo htmlspecialchars( $value1["deslogin"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h3></label>
     <label class="text-dark"><h5>@<?php echo htmlspecialchars( $value1["dtregister"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5></label>
   </div>
-  <div class="border border-light">
+  <div class="border border-dark">
     <h3><?php echo htmlspecialchars( $value1["destweet"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h3>
   </div>
   <?php } ?>
   </div>
 </div>
-<div class="col-2 d-flex flex-column flex-shrink-0 p-4">
-  <span class="border border-light"> Search Twitter</span>
-</div>
-<div class="col-2">
-
-</div> 
-
-</div>
-
-</body>
-</html>

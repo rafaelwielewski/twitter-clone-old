@@ -26,24 +26,24 @@ class User extends Model {
 		return $results;
 	}
 
-	public function get($iduser)
+	public function get($deslogin)
 	{
-
+		var_dump ($deslogin);
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM tb_users WHERE iduser = :iduser", array(
-			":iduser"=>$iduser
+		$results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", array(
+			":LOGIN"=>$deslogin
 		));
 
 		$data = $results[0];
 
 		$data['deslogin'] = utf8_encode($data['deslogin']);
 
-
 		$this->setData($data);
 
 	}
-	
+
+
 	
 	public static function getFromSession()
 	{
@@ -115,8 +115,25 @@ class User extends Model {
 		) {
             header("Location: /");
             exit;
-        } 
+	
+		
+		}
 
+	}
+	
+	public static function verifyLoggedin()
+	{
+
+		if (
+			isset($_SESSION[User::SESSION])
+			||
+			$_SESSION[User::SESSION]
+		) {
+            header("Location: /home");
+            exit;
+	
+		
+		}
 
 	}
 

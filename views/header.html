@@ -127,17 +127,9 @@
 </svg>
 
 <div class="d-flex flex-nowrap bg-black">
+  <div class="col-2 d-flex flex-column flex-shrink-0 p-4"></div>
 
-  <!-- col-lg-8 mx-auto p-4 py-md-5 
-  d-flex flex-column flex-shrink-0 p-4 text-bg-dark
--->
-
-
-  <div class="col-md-2 d-md-block">
-
-  </div>
-
-  <div class="col-2 d-flex flex-column flex-shrink-0 p-4">
+  <div class="twitter-sidebar2 d-flex flex-column flex-shrink-0 p-4 col-2" position="fixed">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#twitter"/></svg>
       <span class="fs-4"></span>
@@ -145,7 +137,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+        <a href="#" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
           <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#home"/></svg>
           <span class="fs-4">home</span>
         </a>
@@ -181,7 +173,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+        <a href="/profile/{function="getUserName()"}" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
           <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#profile"/></svg>
           <span class="fs-4">Profile</span>
         </a>
@@ -203,10 +195,11 @@
         <li><a class="dropdown-item" href="/logout">Sign out</a></li>
       </ul>
     </div>
+  </div>
 
 
 
     
-  </div>
+
 
 

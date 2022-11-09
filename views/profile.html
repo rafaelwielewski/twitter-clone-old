@@ -1,0 +1,44 @@
+<div class="col-4 d-flex flex-column flex-shrink-4 p-4">
+  <div class="text-white fs-3 fw-normal">
+    <div class="row g-0 border border-light">
+      <div class="col-12">
+        <h2>{$user.desname}</h2>
+      </div>
+      <div class="col-12 text-dark">
+        <h4>@{$user.deslogin}</h4>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+  </div>
+  <div class="text-white fs-3 fw-normal">
+    {loop="$posts"}
+    <div class="border border-dark">
+    <div class="col-12">
+      <label class="text-white"><h2>{$value.desname}</h2></label>
+      <label class="text-dark"><h3>@{$value.deslogin}</h3></label>
+      <label class="text-dark"><h5>@{$value.dtregister}</h5></label>
+    </div>
+    <div class="col-12">
+      <label class="text-white"><h2>{$value.destweet}</h2></label>
+    </div>
+    </div>
+    {/loop}
+</div>
+</div>
+
+
+<div class="col-2 d-flex flex-column flex-shrink-0 p-4">
+  <span class="border border-light"> Search Twitter</span>
+</div>
+
+<div class="col-2 d-flex flex-column flex-shrink-0 p-2">
+
+</div> 
+
+</div>
+
+</body>
+</html>

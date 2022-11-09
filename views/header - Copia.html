@@ -1,4 +1,4 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
+<!DOCTYPE html>
 <!--
     Hcode Store by hcode.com.br
 -->
@@ -127,7 +127,7 @@
 </svg>
 
 <div class="d-flex flex-nowrap bg-black">
-  <div class="col-2 d-flex flex-column flex-shrink-0 p-4"></div>
+  <div class="col-2"></div>
 
   <div class="twitter-sidebar2 d-flex flex-column flex-shrink-0 p-4 col-2" position="fixed">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -173,7 +173,7 @@
         </a>
       </li>
       <li>
-        <a href="/profile/<?php echo getUserName(); ?>" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+        <a href="/profile/{function="getUserName()"}" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
           <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#profile"/></svg>
           <span class="fs-4">Profile</span>
         </a>
@@ -189,7 +189,7 @@
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
-        <?php echo getUserName(); ?>
+        {function="getUserName()"}
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
         <li><a class="dropdown-item" href="/logout">Sign out</a></li>

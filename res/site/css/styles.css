@@ -1144,3 +1144,67 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .pagination > li > a, .pagination > li > span {
   color: #e67e22;
 }
+
+
+.twitter-sidebar2 {
+    height: 100vh;
+}
+
+@media (min-width:0px) {
+    .twitter-start {
+            background: #000000;
+            position: fixed;
+            width: 300px;
+            margin-left: 0px;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
+            height: 100vh;
+        }
+    }
+
+@media (min-width:300px) {
+    .twitter-sidebar {
+        background: #000000;
+        position: fixed;
+        width: 300px;
+        margin-left: 300px;
+        flex-wrap: nowrap;
+        flex-shrink: 1;
+        height: 100vh;
+    }
+}
+
+
+.twitter-content {
+        background: #000000;
+        width: 600px;
+        margin-left: 600px;
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+        height: 100vh;
+    }
+
+
+@media (min-width:600px) {
+    .twitter-search {
+            background: #000000;
+            position: fixed;
+            width: 300px;
+            margin-left: 1200px;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
+            height: 100vh;
+        }
+    }
+
+@media (min-width:0) {
+.twitter-end {
+        background: #000000;
+        position: fixed;
+        width: 300px;
+        margin-left: 1500px;
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+        height: 100vh;
+    }
+}

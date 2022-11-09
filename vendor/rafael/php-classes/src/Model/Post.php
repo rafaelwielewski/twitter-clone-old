@@ -9,12 +9,23 @@ use \Rafael\Mailer;
 class Post extends Model {
 
 
-    public static function showPosts()
+    public static function showPostsAll()
 	{
 
 		$sql = new Sql();
 
 		return $sql->select("SELECT * FROM tb_tweets ORDER BY dtregister");
+
+	}
+
+	public static function showPosts($login)
+	{
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_tweets WHERE deslogin = :LOGIN ORDER BY dtregister", array(
+			":LOGIN"=>$login 
+		)); 
 
 	}
     

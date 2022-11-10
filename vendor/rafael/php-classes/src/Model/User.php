@@ -16,7 +16,41 @@ class User extends Model {
 	const ERROR_REGISTER = "UserErrorRegister";
 	const SUCCESS = "UserSucesss";
 
+	public static function showPostsAll()
+	{
 
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_tweets ORDER BY dtregister");
+
+	}
+
+	public static function showPosts($login)
+	{
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_tweets WHERE deslogin = :LOGIN ORDER BY dtregister", array(
+			":LOGIN"=>$login 
+		)); 
+
+	}
+
+	public function savetweet()
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_tweets_save(:iduser, :desname, :deslogin, :destweet)", array(
+			":iduser"=>$this->getiduser(),
+			":desname"=>$this->getdesname(),
+			":deslogin"=>$this->getdeslogin(),
+			":destweet"=>$this->getdestweet()
+		));
+
+		$this->setData($results[0]);
+
+	}
     public static function list3()
 	{
 

@@ -44,7 +44,7 @@ class Post extends Model {
 
 	}
 
-	public function save()
+	public function savetweet()
 	{
 
 		$sql = new Sql();

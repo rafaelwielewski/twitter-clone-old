@@ -1,7 +1,6 @@
 <?php 
 
 use \Rafael\Page;
-use \Rafael\Model\Post;
 use \Rafael\Model\User;
 
 $app->get("/", function(){
@@ -52,17 +51,19 @@ $app->get("/logout", function(){
 $app->get("/home", function(){
 	
 	User::verifyLogin();
-	//$user = new User();
 	$user = User::list3();
-	//var_dump ($user);
-	$postsall = Post::showPostsAll();
+	$user2 = User::listAll();
+	$postsall = User::showPostsAll();
 	$page = new Page();
 	$page->setTpl("index" , [
-		'postsall'=>Post::checkList($postsall),
-		'user'=>User::checkList($user)
+		'postsall'=>User::checkList($postsall),
+		'user'=>User::checkList($user),
+		'user2'=>User::checkList($user2)
 	]);
 	
 });
+
+
 
 $app->get("/connect_people", function(){
 	
@@ -81,7 +82,7 @@ $app->get("/connect_people", function(){
 $app->post("/tweet", function(){
 	
 	$user = User::getFromSession();
-	$tweet = new Post();
+	$tweet = new User();
 
 	$_POST['destweet'] = $_POST['tweet'];
 	$_POST['iduser'] = $user->getiduser();
@@ -96,7 +97,7 @@ $app->post("/tweet", function(){
 		'deslogin'=>$user->getdeslogin(),
 		'destweet'=>$_POST['tweet'],
 	]);
-	$tweet->save();
+	$tweet->savetweet();
 
 	header("Location: /home");
 	exit;
@@ -163,10 +164,10 @@ $app->get("/profile/:deslogin", function($deslogin){
 	User::verifyLogin();
 	$user = new User();
 	$user->get($deslogin);
-	$posts = Post::showPosts($deslogin);
+	$posts = User::showPosts($deslogin);
 	$page = new Page();
 	$page->setTpl("profile" ,[
-		'posts'=>Post::checkList($posts),
+		'posts'=>user::checkList($posts),
 		'user'=>$user->getValues(),
 	]);
 });

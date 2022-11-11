@@ -3,6 +3,19 @@
 use \Rafael\Page;
 use \Rafael\Model\User;
 
+$app->get("/teste", function(){
+	
+		
+	$page = new Page([
+		'header'=>false,
+		'footer'=>false
+	]);
+
+	$page->setTpl("teste");
+
+});
+
+
 $app->get("/", function(){
 	
 	User::verifyLoggedin();
@@ -19,6 +32,7 @@ $app->get("/", function(){
 	]);
 
 });
+
 
 $app->post("/", function(){
 
@@ -52,13 +66,11 @@ $app->get("/home", function(){
 	
 	User::verifyLogin();
 	$user = User::list3();
-	$user2 = User::listAll();
 	$postsall = User::showPostsAll();
 	$page = new Page();
 	$page->setTpl("index" , [
 		'postsall'=>User::checkList($postsall),
-		'user'=>User::checkList($user),
-		'user2'=>User::checkList($user2)
+		'user'=>User::checkList($user)
 	]);
 	
 });
@@ -104,6 +116,58 @@ $app->post("/tweet", function(){
 	
 });
 
+$app->get("/tweet/:idtweet", function($idtweet){
+	
+	User::verifyLogin();
+	$post = User::showPost($idtweet);
+	$replies = User::showReplies($idtweet);
+	$page = new Page();
+	$page->setTpl("tweet" , [
+		'post'=>User::checkList($post),
+		'replies'=>User::checkList($replies)
+	]);
+	
+});
+
+
+$app->post("/tweet/:idtweet/reply", function($idtweet){
+	
+	$user = User::getFromSession();
+	$tweet = new User();
+
+	$_POST['desreply'] = $_POST['reply'];
+	$_POST['idtweet'] = $idtweet;
+	$_POST['iduser'] = $user->getiduser();
+	$_POST['desname'] = $user->getdesname();
+	$_POST['deslogin'] = $user->getdeslogin();
+
+	$tweet->setData($_POST);
+	var_dump ($tweet);
+	$tweet->savereply();
+
+	header("Location: /tweet/$idtweet");
+	exit;
+	
+});
+
+$app->get("/like/:idtweet", function($idtweet){
+	$user = User::getFromSession();
+	$tweet = new User();
+	$tweet->setData([
+		'iduser'=>$user->getiduser(),
+	]);
+	if ($tweet->checkLikeExist($idtweet) === true) {
+		$tweet->liketweet($idtweet);
+		header("Location: /home");
+		exit;
+		var_dump ($tweet);
+	}else {
+		$tweet->removelike($idtweet);
+		header("Location: /home");
+		exit;
+	}
+	
+});
 
 
 $app->post("/register", function(){

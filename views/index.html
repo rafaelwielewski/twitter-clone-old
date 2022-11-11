@@ -21,9 +21,9 @@
     <div class="col-md-3">
     </div>
     <div class="col-md-3">
-        <a href="#" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+        <a href="/tweet/{$value.idtweet}" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
           <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#comments"/></svg>
-          <span class="fs-4"></span>
+          <span class="fs-4">{$value.desreplies}</span>
         </a>
     </div>
     <div class="col-md-3">
@@ -33,9 +33,9 @@
         </a>
     </div>
     <div class="col-md-3">
-        <a href="#" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+        <a href="/like/{$value.idtweet}" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
           <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#like"/></svg>
-          <span class="fs-4"></span>
+          <span class="fs-4">{$value.deslikes}</span>
         </a>
       </div>
     </div>

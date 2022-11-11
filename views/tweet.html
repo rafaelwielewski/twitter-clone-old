@@ -1,0 +1,78 @@
+<div class="col-4 d-flex flex-column flex-shrink-4 p-4">
+  {loop="$post"}
+  <div class="text-white fs-3 fw-normal border border-dark row g-0">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
+      <img class="img-responsive" height="75" width="75" id="image-preview" src="{$value.desphoto}" alt="Photo">
+    </div>
+    <div class="col-md-9">
+      <label class="text-white"><h3>{$value.desname}</h2></label>
+      <label class="text-dark"><h4>@{$value.deslogin}</h3></label>
+      <label class="text-dark"><h5>@{$value.dtregister}</h5></label><br>
+      <label class="text-white"><h3>{$value.destweet}</h2></label>
+    </div>
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-3">
+        <a href="/tweet/{$value.idtweet}" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+          <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#comments"/></svg>
+          <span class="fs-4">{$value.desreplies}</span>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="#" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+          <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#retweet"/></svg>
+          <span class="fs-4"></span>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="/like/{$value.idtweet}" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+          <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#like"/></svg>
+          <span class="fs-4">{$value.deslikes}</span>
+        </a>
+      </div>
+    </div>
+  <form action="/tweet/{$value.idtweet}/reply" method="post">
+  <div class="form-floating">
+  <textarea class="form-control bg-black text-white fs-3 fw-normal" style="height: 100px" class="form-control" id="reply" name="reply" value="reply" placeholder="What's happening" required></textarea>
+  <button type="submit" class="btn btn-primary" name="enviar" id="enviar" value="enviar">Tweet</button>
+  </div>
+  </form>
+  {/loop}
+  {loop="$replies"}
+  <div class="text-white fs-3 fw-normal border border-dark row g-0">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
+      <img class="img-responsive" height="75" width="75" id="image-preview" src="{$value.desphoto}" alt="Photo">
+    </div>
+    <div class="col-md-9">
+      <label class="text-white"><h3>{$value.desname}</h2></label>
+      <label class="text-dark"><h4>@{$value.deslogin}</h3></label>
+      <label class="text-dark"><h5>@{$value.dtregister}</h5></label><br>
+      <label class="text-white"><h3>{$value.desreply}</h2></label>
+    </div>
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-3">
+        <a href="/tweet/{$value.idtweet}" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+          <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#comments"/></svg>
+          <span class="fs-4"></span>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="#" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+          <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#retweet"/></svg>
+          <span class="fs-4"></span>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="/like/{$value.idtweet}" class="nav-link text-white d-flex align-items-center mb-3 mb-md-0 me-md-auto" aria-current="page">
+          <svg class="bi pe-none me-2" width="26.25" height="26.25"><use xlink:href="#like"/></svg>
+          <span class="fs-4"></span>
+        </a>
+      </div>
+    </div>
+  {/loop}
+</div>

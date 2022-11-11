@@ -10,4 +10,14 @@ function getUserName()
 	return $user->getdeslogin();
 
 }
+
+function getTweetId()
+{
+
+	$user = User::listAll();
+	var_dump($user);
+
+	return $user->getdeslogin();
+
+}
  ?>

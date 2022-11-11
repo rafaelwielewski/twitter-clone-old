@@ -36,11 +36,33 @@ class User extends Model {
 
 	}
 
-	public function savetweet()
+	public static function showPost($idtweet)
 	{
 
 		$sql = new Sql();
 
+		return $sql->select("SELECT * FROM tb_tweets WHERE idtweet = :idtweet", array(
+			":idtweet"=>$idtweet 
+		)); 
+
+	}
+
+	public static function showReplies($idtweet)
+	{
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_replies WHERE idtweet = :idtweet", array(
+			":idtweet"=>$idtweet
+		)); 
+
+	
+	}
+
+	public function savetweet()
+	{
+
+		$sql = new Sql();
+		
 		$results = $sql->select("CALL sp_tweets_save(:iduser, :desname, :deslogin, :destweet)", array(
 			":iduser"=>$this->getiduser(),
 			":desname"=>$this->getdesname(),
@@ -51,6 +73,113 @@ class User extends Model {
 		$this->setData($results[0]);
 
 	}
+
+	public function savereply()
+	{
+
+		$sql = new Sql();
+		
+		$results = $sql->select("INSERT INTO tb_replies (idtweet, iduser, desname, deslogin, desreply)
+		VALUES(:idtweet, :iduser, :desname, :deslogin, :desreply);", array(
+			":idtweet"=>$this->getidtweet(),
+			":iduser"=>$this->getiduser(),
+			":desname"=>$this->getdesname(),
+			":deslogin"=>$this->getdeslogin(),
+			":desreply"=>$this->getdesreply()
+		));
+
+		$results2 = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_replies WHERE (idtweet) = (:idtweet)", [
+			":idtweet"=>$this->getidtweet(),
+		]);
+
+		$result2Total = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+		$total = (int)$result2Total[0]["nrtotal"];
+
+		$result3 = $sql->select("UPDATE tb_tweets
+		SET 
+			desreplies = :total
+		WHERE idtweet = :idtweet;", array(
+			":idtweet"=>$this->getidtweet(),
+			":total"=>$total
+		));
+
+
+	}
+
+	public function liketweet($idtweet)
+	{
+		$sql = new Sql();
+
+		$results = $sql->select("INSERT INTO tb_likes (idtweet, iduser)
+		VALUES(:idtweet, :iduser);", array(
+			":idtweet"=>$idtweet,
+			":iduser"=>$this->getiduser()
+		));
+
+		$results2 = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_likes WHERE (idtweet) = (:idtweet)", [
+			':idtweet'=>$idtweet,
+		]);
+
+		$result2Total = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+		$total = (int)$result2Total[0]["nrtotal"];
+
+		$resultlikes = $sql->select("UPDATE tb_tweets
+		SET 
+			deslikes = :total
+		WHERE idtweet = :idtweet;", array(
+			":idtweet"=>$idtweet,
+			":total"=>$total
+		));
+
+
+	}
+
+	public function checkLikeExist($idtweet)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_likes WHERE (idtweet, iduser) = (:idtweet, :iduser)", [
+			':idtweet'=>$idtweet,
+			":iduser"=>$this->getiduser()
+		]);
+		var_dump ($results);
+
+		return (count($results) === 0);
+
+	}
+
+	public function removelike($idtweet)
+	{
+
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_likes WHERE (idtweet, iduser) = (:idtweet, :iduser)", [
+			':idtweet'=>$idtweet,
+			":iduser"=>$this->getiduser()
+		]);
+
+		$results2 = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_likes WHERE (idtweet) = (:idtweet)", [
+			':idtweet'=>$idtweet,
+		]);
+
+		$result2Total = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+		
+		$total = (int)$result2Total[0]["nrtotal"];
+
+		$resultlikes = $sql->select("UPDATE tb_tweets
+		SET 
+			deslikes = :total
+		WHERE idtweet = :idtweet;", array(
+			":idtweet"=>$idtweet,
+			":total"=>$total
+		));
+
+
+	}
+
     public static function list3()
 	{
 
@@ -117,6 +246,7 @@ class User extends Model {
 		return $user;
 
 	}
+
    
 
     public static function login($login, $password)
